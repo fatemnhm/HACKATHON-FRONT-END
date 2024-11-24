@@ -1,18 +1,23 @@
 import { Link } from "react-router-dom";
-import AuthorInfo from '../../components/AuthorInfo/AuthorInfo';
+
 
 const ProductList = (props) => {
+  const [cart, setCart] = useState([]);
+
+  const handleAddProductToCart = (product) => {
+    setCart([...cart, product]);
+  };
   return (
     <main className={styles.container}>
     {props.products.map((product) => (
-      <Link key={product._id} to={`/products/${product._id}`}>
+      <Link key={product.product_id} to={`/products/${product.product_id}`}>
         <article>
           <header>
             <div>
-            <h2>{product.title}</h2>
-            {categoryIcons[product.category] }
+            <h2>{product.product_name}</h2>
+            {product.category}
             </div>
-            <AuthorInfo content={product} />
+            
             
           </header>
           <p>{product.text}</p>
@@ -23,4 +28,4 @@ const ProductList = (props) => {
   );
 }
 
-export default ProdactList;
+export default ProductList;
