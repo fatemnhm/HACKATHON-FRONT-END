@@ -1,13 +1,11 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState, useContext } from 'react';
-import AuthedUserContext from './AuthedUserContext'; // Import your context
-import productService from './productService'; // Import your product service
-import AuthorInfo from './AuthorInfo'; // Import your AuthorInfo component
+import productService from '../../services/productService'; // Import your product service
 
 const ProductDetails = ({ handleAddProductToCart }) => {
   const [product, setProduct] = useState(null);
   const { id } = useParams();
-  const user = useContext(AuthedUserContext);
+  
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -22,10 +20,9 @@ const ProductDetails = ({ handleAddProductToCart }) => {
       {product ? (
         <article>
           <header>
-            <h2>{product.title}</h2>
-            <AuthorInfo content={product} />
+            <h2>{product.product_name}</h2>
           </header>
-          <p>{product.text}</p>
+          <p>{product.category}</p>
           {user && <button onClick={() => handleAddProductToCart(product)}>Add to Cart</button>}
         </article>
       ) : (
